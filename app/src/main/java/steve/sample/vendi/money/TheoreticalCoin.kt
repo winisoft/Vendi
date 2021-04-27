@@ -33,7 +33,7 @@ sealed class TheoreticalCoin(
         weightMilligrams = 2268,
         diameterMicrometers = 17910,
         thicknessMicrometers = 1350,
-        expectedVoltage = 2.313f,
+        expectedVoltage = 2.3133597f,
         isAccepted = true
     )
 
@@ -42,7 +42,7 @@ sealed class TheoreticalCoin(
         weightMilligrams = 5670,
         diameterMicrometers = 24260,
         thicknessMicrometers = 1750,
-        expectedVoltage = 5.783f,
+        expectedVoltage = 5.7834f,
         isAccepted = true
     )
 

@@ -17,31 +17,30 @@ constructor()
 : CoinSeparator {
 
     override fun sort(maybeCoin: MaybeCoinObject): TheoreticalCoin? {
-        for (i in coinFilters.indices - 1)
-            { coinFilters[i].findWeightMatch(maybeCoin)?.let { return it } }
-        return (coinFilters.takeLast(1) as CoinWeightFilter)
-            .findWeightMatch(maybeCoin)
+        for (element in coinFilters) {
+            element.findWeightMatch(maybeCoin)?.let { return it } }
+        return null
     }
 
     private val coinFilters: List<CoinWeightFilter> = listOf(
         object: CoinWeightFilter {
             override fun findWeightMatch(candidate: MaybeCoinObject): Quarter? =
-                if (candidate.lengthMicrometers == Quarter.diameterMicrometers
-                    && candidate.widestPointMicrometers == Quarter.diameterMicrometers
+                if (candidate.lengthMicrometers == Quarter.diameterMicrometers * 2
+                    && candidate.widestPointMicrometers == Quarter.thicknessMicrometers
                     && candidate.weightMilligrams == Quarter.weightMilligrams
                 ) Quarter else null
         },
         object: CoinWeightFilter {
             override fun findWeightMatch(candidate: MaybeCoinObject): Nickel? =
-                if (candidate.lengthMicrometers == Nickel.diameterMicrometers
-                    && candidate.widestPointMicrometers == Nickel.diameterMicrometers
+                if (candidate.lengthMicrometers == Nickel.diameterMicrometers * 2
+                    && candidate.widestPointMicrometers == Nickel.thicknessMicrometers
                     && candidate.weightMilligrams == Nickel.weightMilligrams
                 ) Nickel else null
         },
         object: CoinWeightFilter {
             override fun findWeightMatch(candidate: MaybeCoinObject): Dime? =
-                if (candidate.lengthMicrometers == Dime.diameterMicrometers
-                    && candidate.widestPointMicrometers == Dime.diameterMicrometers
+                if (candidate.lengthMicrometers == Dime.diameterMicrometers * 2
+                    && candidate.widestPointMicrometers == Dime.thicknessMicrometers
                     && candidate.weightMilligrams == Dime.weightMilligrams
                 ) Dime else null
         }

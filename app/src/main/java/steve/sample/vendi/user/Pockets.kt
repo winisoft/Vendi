@@ -22,9 +22,9 @@ object Pockets {
         override val materialComposition = MaybeCoinObject.MaterialComposition.COPPER_75_NICKEL_25
     }
     val dime = object: MaybeCoinObject {
-        override val weightMilligrams = TheoreticalCoin.Quarter.weightMilligrams
-        override val lengthMicrometers = TheoreticalCoin.Quarter.diameterMicrometers * 2
-        override val widestPointMicrometers = TheoreticalCoin.Quarter.thicknessMicrometers
+        override val weightMilligrams = TheoreticalCoin.Dime.weightMilligrams
+        override val lengthMicrometers = TheoreticalCoin.Dime.diameterMicrometers * 2
+        override val widestPointMicrometers = TheoreticalCoin.Dime.thicknessMicrometers
         override val materialComposition = MaybeCoinObject.MaterialComposition.COPPER_92_NICKEL_8
     }
     val penny = object: MaybeCoinObject {

@@ -32,19 +32,18 @@ constructor() {
      * impedes the transmission of a magnetic field
      */
     private val MaybeCoinObject.producedVoltage: Float
-        get() = when(materialComposition) {
-            MaybeCoinObject.MaterialComposition.COPPER_92_NICKEL_8 -> 2.40f
-            MaybeCoinObject.MaterialComposition.ZINC_98_COPPER_2 -> 2.95f
-            MaybeCoinObject.MaterialComposition.COPPER_75_NICKEL_25 -> 3.68f
-            MaybeCoinObject.MaterialComposition.PLASTIC -> 0.2f
-            MaybeCoinObject.MaterialComposition.WOOD -> 0.01f
-            MaybeCoinObject.MaterialComposition.ALUMINUM -> 3.91f
-            else -> Random.nextFloat() * 10f
-        }.let {
-            it * (weightMilligrams / 1000)
-        }
+        get() {
+            val weightGrams: Float = weightMilligrams / 1000f
+            val impededPerGram = when (materialComposition) {
+                MaybeCoinObject.MaterialComposition.COPPER_92_NICKEL_8 -> 1.02f
+                MaybeCoinObject.MaterialComposition.ZINC_98_COPPER_2 -> 1.89f
+                MaybeCoinObject.MaterialComposition.COPPER_75_NICKEL_25 -> 2.30f
+                MaybeCoinObject.MaterialComposition.PLASTIC -> 0.1f
+                MaybeCoinObject.MaterialComposition.WOOD -> 0.05f
+                MaybeCoinObject.MaterialComposition.ALUMINUM -> 3.32f
+                else -> Random.nextFloat() * 10f
+            }
 
-    companion object {
-        const val SOLENOID_A_AMPERES = 1.0f
-    }
+            return weightGrams * impededPerGram
+        }
 }

@@ -24,12 +24,10 @@ constructor(
      * @return true if the object entered the housing through its slot, false if not
      */
     fun attemptInsert(maybeCoin: MaybeCoinObject) {
-        maybeCoin.fitsIntoSlot.let { doesFitSlot ->
-            if (doesFitSlot)
-                acceptMaybeCoin(maybeCoin)
-            else
-                throw Exception("This object doesn't even fit.")
-        }
+        if (maybeCoin.fitsIntoSlot)
+            acceptMaybeCoin(maybeCoin)
+        else
+            throw Exception("This object doesn't even fit.")
     }
 
     /**
@@ -48,21 +46,10 @@ constructor(
         }
 
         when (materialMatch) {
-            TheoreticalCoin.Quarter -> {
-                coinBank.addQuarter()
-                TheoreticalCoin.Quarter.currencyValue
-            }
-            TheoreticalCoin.Dime -> {
-                coinBank.addDime()
-                TheoreticalCoin.Dime.currencyValue
-            }
-            TheoreticalCoin.Nickel -> {
-                coinBank.addNickel()
-                TheoreticalCoin.Nickel.currencyValue
-            }
-            else -> {
-                CoinReturn.add(maybeCoin)
-            }
+            TheoreticalCoin.Quarter -> coinBank.addQuarter()
+            TheoreticalCoin.Dime -> coinBank.addDime()
+            TheoreticalCoin.Nickel -> coinBank.addNickel()
+            else -> CoinReturn.add(maybeCoin)
         }
     }
 
