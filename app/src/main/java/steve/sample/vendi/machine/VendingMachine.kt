@@ -39,7 +39,7 @@ constructor(
         this.scope = scope
         this.scope.launch {
             coinBank.balance.collect {
-                _display.value = "INSERT COIN | $it"
+                _display.value = "INSERT COIN | ${String.format("%.2f", it)}"
             }
         }
     }
