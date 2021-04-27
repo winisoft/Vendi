@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/compose-model-1619020383863.xml" value="1.5" />
+        <entry key="../../../../layout/compose-model-1619020737609.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1619023139593.xml" value="1.5" />
+        <entry key="../../../../layout/compose-model-1619024527460.xml" value="0.165" />
+        <entry key="../../../../layout/compose-model-1619026737581.xml" value="0.335" />
+        <entry key="../../../../layout/compose-model-1619037131382.xml" value="0.375" />
+        <entry key="../../../../layout/compose-model-1619066271879.xml" value="0.22888513513513514" />
+        <entry key="../../../../layout/compose-model-1619066610537.xml" value="0.39191919191919194" />
+        <entry key="../../../../layout/compose-model-1619239491363.xml" value="0.5283719443913357" />
+        <entry key="../../../../layout/compose-model-1619239598230.xml" value="1.0" />
+        <entry key="../../../../layout/compose-model-1619243822072.xml" value="0.505522331948535" />
+        <entry key="../../../../layout/compose-model-1619257397165.xml" value="0.7378277153558053" />
+        <entry key="../../../../layout/compose-model-1619257403425.xml" value="0.795959595959596" />
+        <entry key="../../../../layout/compose-model-1619366367056.xml" value="0.32059271451370736" />
+        <entry key="../../../../layout/compose-model-1619373035878.xml" value="0.41270592231257797" />
+        <entry key="../../../../layout/compose-model-1619509716019.xml" value="0.24127906976744187" />
+        <entry key="../../../../layout/compose-model-1619510253336.xml" value="0.375" />
+        <entry key="app/src/main/res/drawable/ic_diode.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom.xml" value="0.165" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom_left.xml" value="0.17962962962962964" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom_left_off.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom_left_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom_off.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom_right.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_bottom_right_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_middle.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_middle_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_top.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_top_left.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_top_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_top_right.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_diode_top_right_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/vending_machine.xml" value="0.12222222222222222" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
