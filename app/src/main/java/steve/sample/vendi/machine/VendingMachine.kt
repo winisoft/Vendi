@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import steve.sample.vendi.user.User
 import steve.sample.vendi.machine.acceptor.CoinAcceptor
@@ -31,16 +32,16 @@ constructor(
     val purchasedItemsBin: MutableList<Product> = mutableListOf()
 
     fun insert(maybeCoinObject: MaybeCoinObject) {
-        val acceptedValue: Float = coinAcceptor.attemptInsert(maybeCoinObject) ?: return
-        val displayedBalance: Float? = display.value.toFloatOrNull()
-        if (displayedBalance == null)
-            _display.value = acceptedValue.toString()
-        else
-            _display.value = (displayedBalance + acceptedValue).toString()
+        coinAcceptor.attemptInsert(maybeCoinObject)
     }
 
     fun initialize(scope: CoroutineScope) {
         this.scope = scope
+        this.scope.launch {
+            coinBank.balance.collect {
+                _display.value = "INSERT COIN | $it"
+            }
+        }
     }
 
     @ExperimentalStdlibApi

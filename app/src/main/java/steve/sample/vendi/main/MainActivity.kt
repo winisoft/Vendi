@@ -69,7 +69,7 @@ fun VendingMachine(
 
             Text(
                 modifier = Modifier
-                    .size(width = 200.dp, height = 100.dp)
+                    .size(width = 250.dp, height = 100.dp)
                     .offset(x = 182.0.dp, y = 94.0.dp),
                 text = display.collectAsState(viewModel.viewModelScope.coroutineContext).value,
                 color = Color.Red,
