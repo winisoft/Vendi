@@ -47,6 +47,6 @@ sealed class TheoreticalCoin(
     )
 
     companion object {
-        val all: List<TheoreticalCoin> = listOf(Quarter, Penny, Nickel, Dime, Quarter)
+        val all: List<TheoreticalCoin> = listOf(Quarter, Penny, Nickel, Dime)
     }
 }

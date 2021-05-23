@@ -20,8 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.merge
 import steve.sample.vendi.R
+import steve.sample.vendi.infrastructure.EventProducer
 import steve.sample.vendi.machine.VendingMachine
 import steve.sample.vendi.machine.stock.Product
 import steve.sample.vendi.money.MaybeCoinObject
@@ -29,7 +34,7 @@ import steve.sample.vendi.ui.theme.VendiTheme
 import steve.sample.vendi.user.Pockets
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), EventProducer<MainContract.MainEvent> {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -46,6 +51,14 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    @ExperimentalCoroutinesApi
+    override fun viewEvents(): Flow<MainContract.MainEvent> = merge(
+        flowOf(MainContract.MainEvent.Initial),
+
+    )
+
     }
 }
 

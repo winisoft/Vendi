@@ -4,6 +4,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import steve.sample.vendi.machine.change.CoinReturn
 import steve.sample.vendi.money.TheoreticalCoin
+import steve.sample.vendi.money.TheoreticalCoin.Quarter
+import steve.sample.vendi.money.TheoreticalCoin.Dime
+import steve.sample.vendi.money.TheoreticalCoin.Nickel
 import steve.sample.vendi.money.MaybeCoinObject
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
@@ -21,17 +24,17 @@ constructor() : BalanceCoinBank {
 
     override fun addQuarter() {
         countQuarters += 1
-        _balance.value += TheoreticalCoin.Quarter.currencyValue
+        _balance.value = _balance.value + Quarter.currencyValue
     }
 
     override fun addDime() {
         countDimes += 1
-        _balance.value += TheoreticalCoin.Dime.currencyValue
+        _balance.value += Dime.currencyValue
     }
 
     override fun addNickel() {
         countNickels += 1
-        _balance.value += TheoreticalCoin.Nickel.currencyValue
+        _balance.value += Nickel.currencyValue
     }
 
     override fun purchase(price: Float) {
@@ -41,19 +44,21 @@ constructor() : BalanceCoinBank {
         var notYetTendered = price
         while(notYetTendered > 0f) {
             when {
-                notYetTendered >= .25f && countQuarters > 0 -> {
-                    _balance.value -= .25f
-                    notYetTendered -= .25f
+                notYetTendered >= Quarter.currencyValue && countQuarters > 0 -> {
+                    _balance.value -= Quarter.currencyValue
+                    notYetTendered -= Quarter.currencyValue
                     countQuarters -= 1
                 }
-                notYetTendered < .25f && balance.value >= .1f && countDimes > 0 -> {
-                    _balance.value -= .1f
-                    notYetTendered -= .1f
+                notYetTendered < Quarter.currencyValue
+                && balance.value >= Dime.currencyValue
+                && countDimes > 0 -> {
+                    _balance.value -= Dime.currencyValue
+                    notYetTendered -= Dime.currencyValue
                     countDimes -= 1
                 }
                 else -> {
-                    _balance.value -= .05f
-                    notYetTendered -= .05f
+                    _balance.value -= Nickel.currencyValue
+                    notYetTendered -= Nickel.currencyValue
                     countNickels -= 1
                 }
             }
@@ -64,15 +69,15 @@ constructor() : BalanceCoinBank {
 
     override fun refundCurrentBalance() {
         repeat(countNickels) {
-            returnObject(TheoreticalCoin.Nickel)
+            returnObject(Nickel)
             countNickels -= 1
         }
         repeat(countDimes) {
-            returnObject(TheoreticalCoin.Dime)
+            returnObject(Dime)
             countDimes -= 1
         }
         repeat(countQuarters) {
-            returnObject(TheoreticalCoin.Quarter)
+            returnObject(Quarter)
             countQuarters -= 1
         }
     }
@@ -84,8 +89,8 @@ constructor() : BalanceCoinBank {
             override val widestPointMicrometers = coin.thicknessMicrometers
             override val materialComposition: MaybeCoinObject.MaterialComposition =
                 when (coin) {
-                    is TheoreticalCoin.Quarter, TheoreticalCoin.Dime -> MaybeCoinObject.MaterialComposition.COPPER_92_NICKEL_8
-                    is TheoreticalCoin.Nickel -> MaybeCoinObject.MaterialComposition.COPPER_75_NICKEL_25
+                    is Quarter, Dime -> MaybeCoinObject.MaterialComposition.COPPER_92_NICKEL_8
+                    is Nickel -> MaybeCoinObject.MaterialComposition.COPPER_75_NICKEL_25
                     else -> throw IllegalArgumentException("How is this not a dime, a quarter, or nickel")
                 }
         })

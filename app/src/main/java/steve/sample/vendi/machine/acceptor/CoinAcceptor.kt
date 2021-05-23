@@ -6,6 +6,9 @@ import steve.sample.vendi.machine.acceptor.filters.CoinSeparator
 import steve.sample.vendi.machine.acceptor.filters.IdentificationProbe
 import steve.sample.vendi.money.MaybeCoinObject
 import steve.sample.vendi.money.TheoreticalCoin
+import steve.sample.vendi.money.TheoreticalCoin.Quarter
+import steve.sample.vendi.money.TheoreticalCoin.Nickel
+import steve.sample.vendi.money.TheoreticalCoin.Dime
 import javax.inject.Inject
 
 class CoinAcceptor
@@ -17,39 +20,31 @@ constructor(
 ) {
 
     /**
-     * Attempts the insertion of some object into the [CoinAcceptor] mechanism, proceeding
-     * to validate that it is currency if it is accepted.
-     *
-     * @param maybeCoin the object the user wants to insert
-     * @return true if the object entered the housing through its slot, false if not
-     */
-    fun attemptInsert(maybeCoin: MaybeCoinObject) {
-        if (maybeCoin.fitsIntoSlot)
-            acceptMaybeCoin(maybeCoin)
-        else
-            throw Exception("This object doesn't even fit.")
-    }
-
-    /**
+     * Attempts the insertion of some object into the [CoinAcceptor] mechanism.
      * Checks whether the object reacts to magnetism like any of the coins we accept, checks whether
      * the shape, size, and weight are a match, then adds it to the coinbank where it should (if it should).
      * Otherwise, it's rejected to the coin return
+     *
+     * @param maybeCoin the object the user wants to insert
+     * @return The coin type identified, if the coin was accepted. If not, null.
      */
-    private fun acceptMaybeCoin(maybeCoin: MaybeCoinObject) {
+    fun insert(maybeCoin: MaybeCoinObject): TheoreticalCoin? {
+        if (!maybeCoin.fitsIntoSlot)
+            throw Exception("This object doesn't even fit.")
 
         val materialMatch: TheoreticalCoin? = identificationProbe.gateToUnlock(maybeCoin)
         val weightMatch: TheoreticalCoin? = coinFilters.sort(maybeCoin)
 
-        if (materialMatch == null || weightMatch == null || materialMatch != weightMatch) {
+        if (materialMatch == null || weightMatch == null) {
             CoinReturn.add(maybeCoin)
-            return
+            return null
         }
 
-        when (materialMatch) {
-            TheoreticalCoin.Quarter -> coinBank.addQuarter()
-            TheoreticalCoin.Dime -> coinBank.addDime()
-            TheoreticalCoin.Nickel -> coinBank.addNickel()
-            else -> CoinReturn.add(maybeCoin)
+        return when (materialMatch to weightMatch) {
+            Quarter to Quarter -> { coinBank.addQuarter(); Quarter }
+            Nickel to Nickel -> { coinBank.addNickel(); Nickel }
+            Dime to Dime -> { coinBank.addDime(); Dime }
+            else -> { CoinReturn.add(maybeCoin); null }
         }
     }
 
@@ -58,7 +53,7 @@ constructor(
      * would fit into it at all. This could just as easily compare against some constant, of course
      */
     private val MaybeCoinObject.fitsIntoSlot: Boolean
-        get() = lengthMicrometers <= TheoreticalCoin.Quarter.diameterMicrometers * 2
-            && widestPointMicrometers <= TheoreticalCoin.Quarter.thicknessMicrometers
+        get() = lengthMicrometers <= Quarter.diameterMicrometers * 2
+            && widestPointMicrometers <= Quarter.thicknessMicrometers
 
 }

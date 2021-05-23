@@ -10,4 +10,8 @@ sealed class Product(open val price: Float, val name: String, @DrawableRes val i
     object Chips: Product(0.5f, "Chips", R.drawable.chips)
 
     object Candy: Product(0.65f, "Candy", R.drawable.candy)
+
+    companion object {
+        val all: List<Product> = listOf(Cola, Chips, Candy)
+    }
 }
